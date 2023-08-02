@@ -1,7 +1,13 @@
 //
-import { createStore } from "redux"
-import counterReducer from "./reducer/counterReducer";
+import { createStore,combineReducers } from "redux"
+import songReducer from "./reducer/songReducer";
+import songData from "./reducer/songData";
 
-const store = createStore(counterReducer)
+let allReducers = combineReducers({
+    selectedSong: songReducer,
+    songsList: songData
+})
+
+const store = createStore(allReducers)
 
 export default store;

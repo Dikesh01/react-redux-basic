@@ -1,19 +1,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { increase,decrease, reset } from "../redux/actions/counterActions";
-
+import { select_song } from "../redux/actions/userAction";
 
 const Display = () =>{
     let dispatch = useDispatch();
-    let count = useSelector(store => store)
-
-
+    let songData = useSelector(state => state.songsList)
     return (
-        <div>
-            <h1>Count : {count}</h1>
-            <button onClick={()=>dispatch(increase())}>Increase</button>
-            <button onClick={()=>dispatch(decrease())}>Decrease</button>
-            <button onClick={()=>dispatch(reset())}>Reset</button>
+        <div className="display_song">
+            <h1>List of all songs...</h1>
+            {
+                songData && 
+                    songData.map((song,index) =>{
+                        return(
+                                <h3 onClick={()=>dispatch(select_song(song))}>{song.name}</h3>  
+                        )                       
+                    })
+            }
         </div>
     )
 }
